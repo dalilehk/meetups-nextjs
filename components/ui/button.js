@@ -1,11 +1,21 @@
 import Link from 'next/link';
 import classes from './button.module.css';
 
+// it renders a link if props link is provided, if not it render a normal button
+
 function Button(props) {
+  if (props.link) {
+    return (
+      <Link href={props.link}>
+        <a className={classes.btn}>{props.children}</a>
+      </Link>
+    );
+  }
+
   return (
-    <Link href={props.link}>
-      <a className={classes.btn}>{props.children}</a>
-    </Link>
+    <button className={classes.btn} onClick={props.onClick}>
+      {props.children}
+    </button>
   );
 }
 

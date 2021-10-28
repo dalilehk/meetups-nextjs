@@ -1,45 +1,25 @@
-const events_data = [
-  {
-    id: 11,
-    title: 'event 1',
-    city: 'Warsaw',
-  },
-  {
-    id: 21,
-    title: 'event 2',
-    city: 'Berlin',
-  },
-  {
-    id: 31,
-    title: 'event 3',
-    city: 'Danzig',
-  },
-  {
-    id: 41,
-    title: 'event 4',
-    city: 'Munich',
-  },
-  {
-    id: 15,
-    title: 'event 5',
-    city: 'Rome',
-  },
-];
+import { Fragment } from 'react';
+import { useRouter } from 'next/router';
 
-import Link from 'next/link';
+import EventList from '../../components/events/event-list';
+import { getAllEvents } from '../../dummy-data';
+import EventsSearch from '../../components/events/events-search';
+
 function AllEventsPage() {
-  return (
-    <div>
-      <h1>All events</h1>
+  const router = useRouter();
+  const events = getAllEvents();
 
-      <ul className="events">
-        {events_data.map((event) => (
-          <li key={event.id}>
-            <Link href={`/events/${event.id}`}>{event.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+  function findEventsHandler(year, month) {
+    // TODO: important! dynamic path for search results. Po wprowadzeniu parametrów wyszukiwania przejdzie do zakładki [...slug]
+    const fullPath = `/events/${year}/${month}`;
+    router.push(fullPath);
+  }
+
+  return (
+    <Fragment>
+      <EventsSearch onSearch={findEventsHandler} />
+      <EventList items={events} />
+    </Fragment>
   );
 }
 
