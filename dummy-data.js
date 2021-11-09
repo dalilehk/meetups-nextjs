@@ -17,7 +17,7 @@ const DUMMY_EVENTS = [
     location: 'New Wall Street 5, 98765 New Work',
     date: '2021-05-30',
     image: 'images/introvert-event.jpg',
-    isFeatured: true,
+    isFeatured: false,
   },
   {
     id: 'e3',
@@ -28,6 +28,16 @@ const DUMMY_EVENTS = [
     date: '2022-04-10',
     image: 'images/extrovert-event.jpg',
     isFeatured: true,
+  },
+
+  {
+    id: 'e4',
+    date: '2022-06-12',
+    description: 'Improve your productivity with Next.js',
+    image: 'images/next.jpg',
+    isFeatured: true,
+    location: 'My Street 12, 10115 Broke City',
+    title: 'Next.js',
   },
 ];
 
