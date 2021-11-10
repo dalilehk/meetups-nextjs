@@ -1,5 +1,6 @@
 // It will work for more that 1 parameter added after /
 // for 1 parameter will be displayed SingleEventPage
+import Head from 'next/head';
 import { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -46,8 +47,20 @@ function FilteredEvents(props) {
 
   console.log(loadedEvents);
 
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={`A list of filtered events`} />
+    </Head>
+  );
+
   if (!loadedEvents) {
-    return <p className="center">Loading...</p>;
+    return (
+      <Fragment>
+        {pageHeadData}
+        <p className="center">Loading...</p>
+      </Fragment>
+    );
   }
 
   const filteredYear = filterData[0];
@@ -55,6 +68,17 @@ function FilteredEvents(props) {
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+  // reusing logic for head
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numMonth}`}
+      />
+    </Head>
+  );
 
   // Handle false URL
   if (
@@ -68,6 +92,7 @@ function FilteredEvents(props) {
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid Filter. Please adjust your values</p>;
         </ErrorAlert>
@@ -90,6 +115,7 @@ function FilteredEvents(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>No events found</ErrorAlert>
         <Button link="/events">Back to all events</Button>
       </Fragment>
@@ -102,6 +128,7 @@ function FilteredEvents(props) {
 
   return (
     <Fragment>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>

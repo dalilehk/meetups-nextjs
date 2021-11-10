@@ -1,3 +1,6 @@
+// in order to inject the contect into <head> tag in html
+import Head from 'next/head';
+
 import { getFeaturedEvents } from '../helpers/api-util';
 import EventList from '../components/events/event-list';
 
@@ -7,6 +10,13 @@ function HomePage(props) {
   const featuredEvents = getFeaturedEvents();
   return (
     <div>
+      <Head>
+        <title>Nextjs Events</title>
+        <meta
+          name="description"
+          content="find a lot of a great events that allow you to evolve..."
+        />
+      </Head>
       <h1>Featured events</h1>
       <EventList items={props.events} />
     </div>

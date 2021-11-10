@@ -1,5 +1,6 @@
 //zczytać id  z event-item i dla tego id wyświetlić dane
 
+import Head from 'next/head';
 import { Fragment } from 'react';
 import { getEventById, getFeaturedEvents } from '../../helpers/api-util';
 import EventSummary from '../../components/event-detail/event-summary';
@@ -21,6 +22,10 @@ function SingleEventPage(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>{chosenEvent.title}</title>
+        <meta name="description" content={chosenEvent.description} />
+      </Head>
       <EventSummary title={title} />
       <EventLogistics
         date={date}
